@@ -60,6 +60,7 @@ PasswordAuthentication no
 To re-enable passwords:
 
 1. Set `PasswordAuthentication yes`
+2. If `UsePAM yes` is not commented, comment it out
 2. Restart the SSH service:
 
 ```bash
