@@ -68,10 +68,10 @@ pct console 900
 
 ```bash
 # Update
-apt update && apt upgrade -y
+sudo apt update && sudo apt upgrade -y
 
 # Install basics
-apt install -y curl gnupg2 ca-certificates software-properties-common apt-transport-https unzip
+sudo apt install -y curl gnupg2 ca-certificates software-properties-common apt-transport-https unzip
 
 # Optional: Set hostname
 hostnamectl set-hostname jenkins
@@ -84,7 +84,7 @@ hostnamectl set-hostname jenkins
 Jenkins requires Java 11 or 17.
 
 ```bash
-apt install -y openjdk-17-jdk
+sudo apt install -y openjdk-17-jdk
 java -version
 ```
 
@@ -95,19 +95,19 @@ java -version
 ### 4.1 Add Jenkins Repo
 
 ```bash
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | tee \
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian-stable binary/ | tee \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 ```
 
 ### 4.2 Install Jenkins
 
 ```bash
-apt update
-apt install -y jenkins
+sudo apt update
+sudo apt install -y jenkins
 ```
 
 ---
