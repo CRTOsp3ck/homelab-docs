@@ -59,25 +59,37 @@ During installation:
 
 ```bash
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y git curl docker.io docker-compose unzip
+sudo apt install -y git curl docker.io unzip
+
+# Install Docker Compose v2
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-### 2. Clone Mailcow
+### 2. Add User to Docker Group
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+Log out and log back in (or run `newgrp docker`) for the changes to take effect.
+
+### 3. Clone Mailcow
 
 ```bash
 git clone https://github.com/mailcow/mailcow-dockerized
 cd mailcow-dockerized
 ```
 
-### 3. Generate Config
+### 4. Generate Config
 
 ```bash
-./generate_config.sh
+sudo ./generate_config.sh
 ```
 
 * Enter `mail.yourdomain.com` as the hostname
 
-### 4. Configure Timezone (Optional)
+### 5. Configure Timezone (Optional)
 
 Edit `mailcow.conf`:
 
@@ -87,17 +99,19 @@ vi mailcow.conf
 
 Set your timezone, e.g. `TZ=Asia/Kuala_Lumpur`
 
-### 5. Start Mailcow
+### 6. Start Mailcow
 
 ```bash
-docker compose pull
-docker compose up -d
+sudo docker-compose pull
+sudo docker-compose up -d
 ```
 
 Mailcow will now be accessible at:
 ➡️ `https://mail.yourdomain.com` (once DNS & reverse proxy are configured)
 
 ---
+
+******************************STEP IS DONE UNTIL HERE******************************
 
 ## 🌐 STEP 3: CONFIGURE CLOUDFLARE DNS
 
